@@ -1,4 +1,4 @@
-﻿
+
 @{
     ViewBag.Title = "HelpDesk";
 
@@ -10,9 +10,9 @@
       el: '#app',
       template: `
         <div class="container">
-          <h1 style="color:#FC6027"">Deixa eu te ajudar a visualizar esta aplicação </h1>
+          <h1 style="color:#FC6027"">Precisa de ajuda para usar a aplicação, se sim, siga os passos abaixo:</h1>
           <ul>
-              <li> Entre com o seu Nome e Comente: 'ajuda'</li>
+              <li> Entre com o seu Nome e a palavra-chave 'crud', no comentário</li>
               <li> Os comentários devem ser: (sem acento e sem CAPS LOCK ligado)</li>
           </ul>
           <hr />
@@ -63,12 +63,24 @@
                 return;
             }
 
-            else if (this.message.trim().indexOf("ajuda") > -1) {
-                this.message2 = "Abra o arquivo: ProjetoWCF.sln e o ProjetoMVC.sln no Viusal Studio. Após isso, escreva: 'mais informacoes' novamente no campo comentário, ARQUIVOS NOS LINKS: github1.com, github2.com. Caso não esteja conseguindo ligue no meu número: 13 97405-8807.";
+            else if (this.message.trim().indexOf("crud") > -1) {
+                this.message2 = "digite no comentário a letra chave: 'c' para eu te ensinar a Cadastrar um produto, 'r' para te ensinar a visualizar a lista de produtos, 'u' para te ensinar a atualizar os dados do produto, 'd' para deletar um produto ";
             }
 
-            else if (this.message.trim().indexOf("mais informacoes") > -1) {
-                this.message2 = "Ao abrir o ProjetoWCF no Visual Studio, entre no arquivo: IProdutoService.cs e execute o WCF, o mesmo deve ser feito para o ProjetoMVC e execute a aplicação. Caso não esteja conseguindo ligue no meu número: 13 97405-8807.";
+            else if (this.message.trim().indexOf("c") > -1) {
+                this.message2 = "Clique em Produtos FCamara, no menu acima, depois clique no botão: + e entre com as informações do novo produto";
+            }
+
+            else if (this.message.trim().indexOf("r") > -1) {
+                this.message2 = "Clique em Produtos FCamara, no menu acima, e visualize a lista de produtos";
+            }
+
+            else if (this.message.trim().indexOf("u") > -1) {
+                this.message2 = "Clique em Produtos FCamara, no menu acima, depois clique no botão: Atualizar info., e por último Atualize com as informações desejadas";
+            }
+
+            else if (this.message.trim().indexOf("d") > -1) {
+                this.message2 = "Clique em Produtos FCamara, no menu acima, depois clique no botão: Deletar e por último confirme a exclusão do produto";
             }
 
             else {
