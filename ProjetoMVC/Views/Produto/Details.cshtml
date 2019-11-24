@@ -1,0 +1,131 @@
+﻿@model ProjetoMVC.ProdutoServiceReference.Produto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    .prod-info-main .product-deatil span.hot {
+        background-color: #fa9442
+    }
+
+    .prod-wrap .product-image span.hot {
+        background-color: #a90329;
+    }
+
+    .prod-info-main .product-deatil span.sale {
+        background-color: #21c2f8
+    }
+
+    .prod-wrap .product-image span.sale {
+        background-color: #57889c;
+    }
+
+    .prod-wrap .product-image span.tag2 {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        padding: 10px 0;
+        color: #fff;
+        font-size: 11px;
+        text-align: center
+    }
+
+    .prod-wrap .product-image span.tag3 {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        width: 60px;
+        height: 36px;
+        border-radius: 50%;
+        padding: 10px 0;
+        color: #fff;
+        font-size: 11px;
+        text-align: center
+    }
+</style>
+
+<h2 style="color:#FE4400">Detalhes do Produto</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="modal-content" style="padding-left:10%;padding-right:-80%;padding-bottom:-20%;background-color:#bfe2f6">
+
+            <div class="prod-info-main prod-wrap clearfix" style="text-align:center">
+                <div class="row">
+                    <div class="col-md-5 col-sm-12 col-xs-12">
+                        <div class="product-image">
+                            @{
+                                switch (Model.Nome)
+                                {
+                                    case "Notebook":
+                                        <img src="~/Images/notebook.jpg" class="img-responsive">break;
+                                    case "Mouse":
+                                        <img src="~/Images/mouse.jpg" class="img-responsive">break;
+                                    case "Monitor":
+                                        <img src="~/Images/monitor.jpg" class="img-responsive">break;
+                                    case "Teclado":
+                                        <img src="~/Images/teclado.jpg" class="img-responsive">break;
+                                    case "Fone de ouvido":
+                                        <img src="~/Images/fone.jpg" class="img-responsive">break;
+                                    case "Caixa de Som":
+                                        <img src="~/Images/caixasom.jpg" class="img-responsive">break;
+                                    case "SSD":
+                                        <img src="~/Images/ssd.jpg" class="img-responsive">break;
+                                }
+                            }
+                            @{
+                                bool ativo = Model.Disponivel;
+                            }
+                            @if (ativo == true)
+                            {
+                                <span class="tag2 hot">
+                                    HOT
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="tag3 sale">
+                                    SALE
+                                </span>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-12 col-xs-12">
+                        <div class="product-deatil">
+                            <h5 class="name">
+                                <a href="#">
+                                    @Html.DisplayFor(model => model.Nome)
+                                </a>
+                            </h5>
+                            <p class="price-container">
+                                <span style="color:#FE4400">Valor:</span>
+                                <span>@Html.DisplayFor(model => model.Valor)</span>
+                            </p>
+                            <span class="tag1"></span>
+                        </div>
+                        <div class="description">
+                            <ul>
+                                <li>Informação 1</li>
+                                <li>Informação 2</li>
+                                <li>Informação 3</li>
+                                <li>Informação 4</li>
+                            </ul>
+                        </div>
+                        <div class="product-info smart-form">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Html.ActionLink("Atualizar info.", "Edit", new { id = Model.ProdutoId }, new { @class = "btn btn-success", style = "font-size:100%" })
+                                    @Html.ActionLink("Deletar", "Delete", new { id = Model.ProdutoId }, new { @class = "btn btn-danger", style = "font-size:100%;" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

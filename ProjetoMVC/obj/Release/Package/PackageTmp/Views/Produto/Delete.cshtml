@@ -1,0 +1,59 @@
+﻿@model ProjetoMVC.ProdutoServiceReference.Produto
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2 style="color:#FE4400">Deletar Produto</h2>
+
+<h4 style="color:#4B4FA1">Tem Certeza que quer excluir este produto ?</h4>
+<div>
+    <h1 style="text-align:center;color:#FE4400">Produtos FCamara</h1>
+    <hr />
+    <div class="modal-body" style="padding-left:10%;padding-right:-80%;padding-bottom:-20%;background-color:#bfe2f6">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ClienteId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ClienteId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Disponivel)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Disponivel)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Valor)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Valor)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-success" /> 
+                @Html.ActionLink("Voltar", "List", new { area= ""}, new { @class="btn btn-danger"})
+            </div>
+        }
+        </div>
+    </div>
