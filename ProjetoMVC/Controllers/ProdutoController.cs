@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -29,7 +29,11 @@ namespace ProjetoMVC.Controllers
         // GET: Clientes/Create
         public ActionResult Create()
         {
-            Produto produto = new Produto();
+            Produto produto = new Produto();           
+            List<Produto> produtos = _wcf.FindAll().ToList();
+
+            ViewBag.LastID = produtos.Count;
+
             //ViewBag.CategoriaId = new SelectList(_categoriaApp.GetAll(), "CategoriaId", "Nome", produto.CategoriaId);
             return View(produto);
         }
@@ -51,6 +55,9 @@ namespace ProjetoMVC.Controllers
         // GET: Clientes/Edit/5
         public ActionResult Edit(int id)
         {
+            List<Produto> produtos = _wcf.FindAll().ToList();
+            ViewBag.LastID = produtos.Count;
+
             Produto produto = _wcf.Find(id);
             //ViewBag.CategoriaId = new SelectList(_categoriaApp.GetAll(), "CategoriaId", "Nome", produto.CategoriaId);
             return View(produto);
