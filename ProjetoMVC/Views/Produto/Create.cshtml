@@ -1,68 +1,74 @@
-﻿@model ProjetoMVC.ProdutoServiceReference.Produto
+@model ProjetoMVC.ProdutoServiceReference.Produto
 
 @{
     ViewBag.Title = "Create";
 }
 
-<h2>Cadastre um novo Produto</h2>
+<head>
+    <script>
+        $(document).ready(function () {
+            var maxId = $("#lastId").val();
+            console.log(maxId);
+            $("#idCliente").attr("max", maxId);
+        });
+    </script>
+</head>
+<h2 style="color:#FE4400;">Cadastre um novo Produto</h2>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm(new { @id="formulario"}))
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h1 style="text-align:center">Produtos FCamara</h1>
-    <hr />
-    <div class="modal-body" style="padding-left:10%;padding-right:-80%;padding-bottom:-20%;background-color:#bfe2f6">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.ClienteId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ClienteId, new { htmlAttributes = new { @class = "form-control", @placeholder="Digite o ID de um de nossos Clientes" } })
-                @Html.ValidationMessageFor(model => model.ClienteId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div class="form-horizontal">
+        <h1 style="text-align:center;color:#FE4400">Produtos FCamara</h1>
+        <hr />
+        <div class="modal-body" style="padding-left:10%;padding-right:-80%;padding-bottom:-20%;background-color:#bfe2f6">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Disponivel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Disponivel)
-                    @Html.ValidationMessageFor(model => model.Disponivel, "", new { @class = "text-danger" })
+                <input type="hidden" name="lastId" id="lastId" value="@ViewBag.LastID" />
+                @Html.LabelFor(model => model.ClienteId, htmlAttributes: new { @class = "control-label col-md-2" })
+               
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ClienteId, new { htmlAttributes = new { @class = "form-control", @placeholder = "Digite o ID de um de nossos Clientes", @id = "idCliente", @min = "0" } })
+                    @Html.ValidationMessageFor(model => model.ClienteId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Disponivel, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Disponivel)
+                        @Html.ValidationMessageFor(model => model.Disponivel, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" id="salvar" value="Create" class="btn btn-success" />
                 </div>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-success" />
-            </div>
-        </div>
     </div>
-</div>
-    }
+}
 <br />
 <div class="form-actions no-color">
     @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-danger" })
 </div>
-
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
