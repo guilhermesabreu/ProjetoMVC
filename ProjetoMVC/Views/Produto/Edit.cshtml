@@ -1,13 +1,22 @@
-﻿@model ProjetoMVC.ProdutoServiceReference.Produto
+@model ProjetoMVC.ProdutoServiceReference.Produto
 
 @{
     ViewBag.Title = "Edit";
 }
 
+
+<head>
+    <script>
+        $(document).ready(function () {
+            var maxId = $("#lastId").val();
+            $("#idCliente2").attr("max", maxId);
+            console.log(maxId);
+        });
+    </script>
+</head>      
 <h2 style="color:#FE4400">Atualizar</h2>
 
-
-@using (Html.BeginForm())
+@using (Html.BeginForm(new { @id = "formulario" }))
 {
     @Html.AntiForgeryToken()
     
@@ -17,9 +26,10 @@
     <div class="modal-body" style="padding-left:10%;padding-right:-80%;padding-bottom:-20%;background-color:#bfe2f6">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
+            <input type="hidden" name="lastId" id="lastId" value="@ViewBag.LastID" />
             @Html.LabelFor(model => model.ClienteId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ClienteId, new { htmlAttributes = new { @class = "form-control", @placeholder="Digite o ID de um de nossos clientes" } })
+                @Html.EditorFor(model => model.ClienteId, new { htmlAttributes = new { @class = "form-control", @placeholder = "Digite o ID de um de nossos clientes", @id = "idCliente2", @min = "0" } })
                 @Html.ValidationMessageFor(model => model.ClienteId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -64,7 +74,3 @@
 <div>
     @Html.ActionLink("Voltar", "List", "Produto", new { @class = "btn btn-danger", @style = "font-size:170%; width:10%;" })
 </div>
-
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
